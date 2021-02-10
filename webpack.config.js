@@ -1,4 +1,3 @@
-var HtmlWebPackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: ['./src/js/index.js'],
     devtool: 'source-map',
@@ -13,7 +12,15 @@ module.exports = {
             test: /\.(js)/,
             exclude: /node_modules/,
             use: {
-              loader: 'script-loader',
+              loader: 'babel-loader',
+              options: {
+                presets: ["@babel/preset-env"],
+                plugins: [
+                  [ "@babel/plugin-transform-runtime", {
+                    "regenerator": true
+                  }]
+                ]
+              }
             }
           },
         {
